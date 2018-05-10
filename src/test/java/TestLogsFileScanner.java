@@ -1,14 +1,15 @@
-import com.google.gson.Gson;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TestLogsFileScanner {
 
-    public static LogsFileScanner dateLogs = new LogsFileScanner();
+    public static LogsFileScanner logsFileScanner = new LogsFileScanner();
+    DateLogs dateLogs = new DateLogs();
+    SortByDate sortByDate = new SortByDate();
 
 
     @Test
@@ -17,7 +18,7 @@ public class TestLogsFileScanner {
         File path = new File("G:\\QA\\TestLogs\\");
         File path2 = new File("G:\\QA\\result\\testres.txt");
 
-       dateLogs.toJSON(path,path2);
+       logsFileScanner.toJSON(path,path2);
 
         assert (path2.exists());
     }
@@ -41,5 +42,21 @@ public class TestLogsFileScanner {
         }
         fileReader.close();
         assert (count==4);
+    }
+
+    @Test
+    public void testSort()
+    {
+       ArrayList<String> list = new ArrayList<>();
+
+        for (Map.Entry me : dateLogs.getDateLogs().entrySet()) {
+            list.add((String) me.getKey());
+        }
+
+//       List<String> newList =  sortByDate.sort(list);
+//
+//        for (String s : newList) {
+//            System.out.println(s);
+//        }
     }
 }
