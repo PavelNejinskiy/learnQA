@@ -1,7 +1,9 @@
 import org.testng.annotations.Test;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +15,7 @@ public class TestLogsFileScanner {
 
 
     @Test
-    public void testGeneralFunctional() throws IOException {
+    public void testGeneralFunctional() throws IOException, ParseException {
 
         File path = new File("G:\\QA\\TestLogs\\");
         File path2 = new File("G:\\QA\\result\\testres.txt");
@@ -44,19 +46,27 @@ public class TestLogsFileScanner {
         assert (count==4);
     }
 
-    @Test
-    public void testSort()
-    {
-       ArrayList<String> list = new ArrayList<>();
+    @Test (dependsOnMethods = "testGeneralFunctional")
+    public void testStringToDate() throws FileNotFoundException, ParseException, InterruptedException {
 
-        for (Map.Entry me : dateLogs.getDateLogs().entrySet()) {
-            list.add((String) me.getKey());
+       ArrayList<String> listForSort = new ArrayList<>();
+       List<Date> listDate = new ArrayList<>();
+
+       listForSort.add("Mar  4 04:16:27");
+       listForSort.add("Mar  4 04:59:26");
+       listForSort.add("Mar  4 04:01:17");
+       listForSort.add("Mar  4 04:31:16");
+       listForSort.add("Feb  4 01:07:28");
+       listForSort.add("Feb  4 03:07:24");
+       listForSort.add("Mar  4 04:38:28");
+
+      listDate = sortByDate.stringToDate(listForSort);
+
+      Thread.sleep(2000);
+
+        for (Date date : listDate) {
+            System.out.println(date);
         }
 
-//       List<String> newList =  sortByDate.sort(list);
-//
-//        for (String s : newList) {
-//            System.out.println(s);
-//        }
     }
 }

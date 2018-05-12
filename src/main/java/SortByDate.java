@@ -1,37 +1,57 @@
-import java.lang.reflect.Array;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class SortByDate {
 
 
-    public List<String> sort(ArrayList<String> list){
+    public DateLogs sort(DateLogs dateLogs) throws ParseException {
 
-        List<String> result = new ArrayList<>();
-        List<Date> format = new ArrayList<>();
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM dd HH:mm:ss");
+        List<Date> formatDate = new ArrayList<>();
 
-        for (String s : list) {
-            try {
-                Date date = formatter.parse(s);
-                format.add(date);
+        DateLogs sortDateLogs = new DateLogs();
+        ArrayList<String> list = new ArrayList<>();
 
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        for (Map.Entry me : dateLogs.getDateLogs().entrySet()) {
+            list.add((String) me.getKey());
+            System.out.println(me.getKey());
         }
 
-        Collections.sort(format);
+        List<String> dateToString = new ArrayList<>();
 
-        for (Date date : format) {
-            result.add(date.toString());
+        stringToDate(list);
+
+        for (Date date : formatDate) {
+            dateToString.add(date.toString());
         }
 
-        return result;
+//        for (String s : dateToString) {
+//
+//            String value = dateLogs.getDateLogs().get(s).toString();
+//            sortDateLogs.getDateLogs().put(s, value);
+//        }
+
+        return sortDateLogs;
+    }
+
+
+    public List<Date> stringToDate(List<String> mylist) throws ParseException {
+
+        List<Date> formatDate = new ArrayList<>();
+
+        DateFormat formatter = new SimpleDateFormat("MMM  dd HH:mm:ss", Locale.ENGLISH);
+        Date date;
+
+        for (int i = 0; i < mylist.size(); i++) {
+           // System.out.println(s);
+           // date = formatter.parse(list.get(i));
+           date = formatter.parse(mylist.get(i));
+            formatDate.add(date);
+        }
+        Collections.sort(formatDate);
+
+        return formatDate;
     }
 
 

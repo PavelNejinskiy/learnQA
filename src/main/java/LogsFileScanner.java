@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.*;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ import java.util.Map;
 public class LogsFileScanner {
 
     public static DateLogs dateLogs = new DateLogs();
+
+    public static SortByDate sortByDate = new SortByDate();
 
     public void directory(File dir) throws IOException {
 
@@ -78,12 +81,14 @@ public class LogsFileScanner {
 
     }
 
-    public static void toJSON(File path1, File path2) throws IOException {
+    public static void toJSON(File path1, File path2) throws IOException, ParseException {
         LogsFileScanner scanner = new LogsFileScanner();
 
         scanner.directory(path1);
 
-        String jsonInString = new Gson().toJson(dateLogs);
+      // sortByDate.sort(dateLogs);
+       // String jsonInString = new Gson().toJson(dateLogs);
+        String jsonInString = new Gson().toJson(sortByDate.sort(dateLogs));
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(path2));
 
@@ -91,10 +96,12 @@ public class LogsFileScanner {
         writer.close();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
 
         File path = new File("G:\\QA\\Logs\\");
         File path2 = new File("G:\\QA\\result\\res.txt");
+
+
 
         toJSON(path, path2);
 
