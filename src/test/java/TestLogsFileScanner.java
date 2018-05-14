@@ -3,9 +3,8 @@ import org.testng.annotations.Test;
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 public class TestLogsFileScanner {
 
@@ -15,7 +14,7 @@ public class TestLogsFileScanner {
 
 
     @Test
-    public void testGeneralFunctional() throws IOException, ParseException {
+    public void testGeneralFunctional() throws IOException, ParseException, InterruptedException {
 
         File path = new File("G:\\QA\\TestLogs\\");
         File path2 = new File("G:\\QA\\result\\testres.txt");

@@ -82,12 +82,10 @@ public class LogsFileScanner {
 
     }
 
-    public static void toJSON(File path1, File path2) throws IOException, ParseException {
+    public static void toJSON(File path1, File path2) throws IOException, ParseException, InterruptedException {
         LogsFileScanner scanner = new LogsFileScanner();
 
         scanner.directory(path1);
-
-       sortByDate.sort(dateLogs);
 
         String jsonInString = new Gson().toJson(sortByDate.sort(dateLogs));
 
@@ -97,7 +95,7 @@ public class LogsFileScanner {
         writer.close();
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException, InterruptedException {
 
         File path = new File("G:\\QA\\Logs\\");
         File path2 = new File("G:\\QA\\result\\res.txt");
