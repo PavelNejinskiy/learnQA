@@ -12,6 +12,8 @@ public class LogsFileScanner {
 
     public static SortByDate sortByDate = new SortByDate();
 
+
+
     public void directory(File dir) throws IOException {
 
         for (File file : dir.listFiles()) {
@@ -22,7 +24,6 @@ public class LogsFileScanner {
 
             }
         }
-
     }
 
     public void read(String path) throws IOException {
@@ -86,8 +87,8 @@ public class LogsFileScanner {
 
         scanner.directory(path1);
 
-      // sortByDate.sort(dateLogs);
-       // String jsonInString = new Gson().toJson(dateLogs);
+       sortByDate.sort(dateLogs);
+
         String jsonInString = new Gson().toJson(sortByDate.sort(dateLogs));
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(path2));
@@ -101,10 +102,7 @@ public class LogsFileScanner {
         File path = new File("G:\\QA\\Logs\\");
         File path2 = new File("G:\\QA\\result\\res.txt");
 
-
-
         toJSON(path, path2);
-
 
     }
 }

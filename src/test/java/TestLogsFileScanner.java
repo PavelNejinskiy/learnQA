@@ -46,11 +46,10 @@ public class TestLogsFileScanner {
         assert (count==4);
     }
 
-    @Test (dependsOnMethods = "testGeneralFunctional")
+    @Test //(dependsOnMethods = "testGeneralFunctional")
     public void testStringToDate() throws FileNotFoundException, ParseException, InterruptedException {
 
        ArrayList<String> listForSort = new ArrayList<>();
-       List<Date> listDate = new ArrayList<>();
 
        listForSort.add("Mar  4 04:16:27");
        listForSort.add("Mar  4 04:59:26");
@@ -60,12 +59,10 @@ public class TestLogsFileScanner {
        listForSort.add("Feb  4 03:07:24");
        listForSort.add("Mar  4 04:38:28");
 
-      listDate = sortByDate.stringToDate(listForSort);
+        sortByDate.sortDate(listForSort);
 
-      Thread.sleep(2000);
-
-        for (Date date : listDate) {
-            System.out.println(date);
+        for (String sortedDate : listForSort) {
+            System.out.println(sortedDate);
         }
 
     }
